@@ -1,0 +1,54 @@
+{% extends "assessment_app/layout.html" %}
+
+
+{% block body %}
+
+    <div class="signing">
+        <h2>ثبت نام دانشجویان</h2>
+
+        <div class="alert_">
+            {% if message %}
+            <div class="alert alert-{{ message.type }} alert-dismissible fade show" role="alert">
+                {{ message.text }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+        </div>
+
+        <form action="{% url 'register_s' %}" method="post">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input autofocus type="text" class="form-control" name="username" id="username_input" placeholder="5628567729">
+                <label for="username_input">نام کاربری (شماره دانشجویی)</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="first_name" id="first_name_input" placeholder="احمد">
+                <label for="first_name_input">نام</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="last_name" id="last_name_input" placeholder="اکبری">
+                <label for="last_name_input">نام خانوادگی</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" name="email" id="email_input" placeholder="foo@email.com">
+                <label for="email_input">آدرس ایمیل</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password" id="password_input" placeholder="*****">
+                <label for="password_input">رمز عبور</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="confirmation" id="confirmation_input" placeholder="*****">
+                <label for="confirmation_input">تکرار رمز عبور</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="phonenumber" id="phonenumber_input" placeholder="09123456789">
+                <label for="phonenumber_input">شماره تلفن (اختیاری)</label>
+            </div>
+            <input class="btn btn-primary" type="submit" value="ثبت نام">
+        </form>
+
+        <p>آیا اکانتی از قبل دارید؟ <a href="{% url 'login_s' %}">ازینجا وارد شوید.</a></p>
+    </div>
+
+{% endblock %}

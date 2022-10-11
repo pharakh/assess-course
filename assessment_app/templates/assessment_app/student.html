@@ -1,0 +1,137 @@
+{% extends "assessment_app/layout.html" %}
+{% load static %}
+
+{% block title %}دانشجو: {{ request.user.first_name }} {{ request.user.last_name }}{% endblock %}
+
+{% block body %}
+<div class="profile">
+    <span id="user_id" style="display: none;" value="{{ request.user.id }}"></span>
+    <div class="profile_student">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab">خانه</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-forms_teacher" type="button" role="tab">ارزشیابی مدرسین</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-scores" type="button" role="tab">امتیازها</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-settings" type="button" role="tab">تنظیمات</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a id="exit" class="nav-link" style="background-color: rgba(226, 50, 30, 0.764); color: white;" href="{% url 'logout' %}">خروج</a>
+            </li>
+        </ul>
+        <hr class="border border-primary border-3 opacity-25">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-home" role="tabpanel" tabindex="0">
+                <ul class="list-group">
+                    <li class="list-group-item">نام: {{ request.user.first_name }}</li>
+                    <li class="list-group-item">نام خانوادگی: {{ request.user.last_name }}</li>
+                    <li class="list-group-item">شماره دانشجویی: {{ request.user }}</li>
+                </ul>
+            </div>
+            <div class="tab-pane fade show active" id="pills-forms_teacher" role="tabpanel" tabindex="0">
+                {% for subject in subjects %}
+                <div class="course">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            فرم ارزشیابی
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src='{{ subject.teacher.photo.name|slice:"14:" }}' class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ subject.name }}</h5>
+                                    <p class="card-text">
+                                        {% if subject.is_teacher_assisstant %}
+                                        <p>
+                                            نام کمک‌مدرس: {{ subject.teacher.user.first_name }} {{ subject.teacher.user.last_name }}
+                                            (نام استاد: {{ subject.current_supervisor.user.first_name }} {{ subject.current_supervisor.user.last_name }})
+                                        </p>
+                                        {% else %}
+                                        <p>نام استاد: {{ subject.teacher.user.first_name }} {{ subject.teacher.user.last_name }}</p>
+                                        {% endif %}
+                                        <small>نیمسال تحصیلی: {{ subject.term }}</small>
+                                    </p>
+                                    <a href="{% url 'forms_by_teacher' subject.id %}" class="btn btn-primary">رفتن به فرم</a>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>
+                    هیچ درس فعالی وجود ندارد.
+                </p>
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade" id="pills-scores" role="tabpanel" tabindex="0">
+                <div class="list-group">
+                    <li class="list-group-item list-group-item-info">مقدار امتیاز کنونی: <b id="current_score">{{ student.score }}</b></li>
+                </div>
+                <hr>
+                <div class="purchased">
+                    <div class="d-grid gap-2 mx-auto">
+                        <button class="btn btn-link" type="button">مشاهده پرداخت‌ها</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="available_prizes">
+                    {% for prize in prizes %}
+                    <div class="this_prize {{ prize.id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ prize.name }}</h5>
+                                <p class="card-text">{{ prize.description }}</p>
+                                <button class="btn btn-primary" type="button" id="{{ prize.id }}">پرداخت</button>
+                            </div>
+                            <div class="card-footer text-muted">
+                                امتیاز مورد نیاز: <b id="current_needed">{{ prize.score_needed }}</b>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-settings" role="tabpanel" tabindex="0">
+                <form id="change_password" method="post">
+                    <h5>برای تغییر رمز عبور از فرم زیر استفاده کنید: </h5>
+                    <hr>
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="password_before" id="password_input_now" placeholder="*****">
+                        <label for="password_input_now">رمز عبور کنونی</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="password" id="password_input_new" placeholder="*****">
+                        <label for="password_input_new">رمز عبور جدید</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="confirmation" id="confirmation_input" placeholder="*****">
+                        <label for="confirmation_input">تکرار رمز عبور</label>
+                    </div>
+                    <div id="input">
+                        <input class="btn btn-primary" type="submit" value="تغییر رمز عبور">
+                        <button class="btn btn-primary" type="button" disabled style="display: none;">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            در حال لود شدن...
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'assessment_app/js/cookie_alert.js' %}"></script>
+    <script src="{% static 'assessment_app/js/control.js' %}"></script>
+    <script src="{% static 'assessment_app/js/change_password.js' %}"></script>
+{% endblock %}

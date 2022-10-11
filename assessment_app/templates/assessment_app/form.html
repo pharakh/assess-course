@@ -1,0 +1,52 @@
+{% extends "assessment_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="form">
+    <div class="form_desc">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-2">
+                    <img src='{{ form.teacher.photo.name|slice:"14:" }}' class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ form.name }}</h5>
+                        <p class="card-text">نام استاد: {{ form.teacher.user.first_name }} {{ form.teacher.user.last_name }}</p>
+                        <p class="card-text"><small class="text-muted"></small></p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="{% url 'forms_by_teacher' form.id %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="hidden" name="form_id" value="{{ form.id }}">
+            {% for question in form.form_sample.question.all %}
+                <div class="form-control question_field">
+                    <p>
+                        {{ question.q_text }}
+                    </p>
+                    <hr>
+                    {% if question.q_type.q_type == "CLOSE" %}
+                    <div class="radio_buttons">
+                        {% for field in question.answer_closed_vals.values.all %}
+                            <div class="form-check form-check-inline" id="{{ question.id }}">
+                                <input required class="form-check-input" type="radio" name="{{ question.id }}" id="{{ field.id }}" value="{{ field.value }}">
+                                <label class="form-check-label" for="inlineRadio1">{{ field.value }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% elif question.q_type.q_type == "OPEN" %}
+                    <div class="mb-3">
+                        <textarea class="form-control" name="{{ question.id }}" rows="3"></textarea>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary" type="submit">ارسال فرم</button>
+        </div>    
+    </form>
+</div>
+{% endblock %}

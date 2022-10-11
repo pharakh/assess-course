@@ -1,0 +1,41 @@
+{% extends "assessment_app/layout.html" %}
+{% load static %}
+
+{% block title %}
+    صفحه اصلی
+{% endblock %}
+
+{% block body %}
+<div class="index_links">
+    <div class="text-bg-success p-3 heading">
+        به وبسایت ارزشیابی دانشگاهی خوش آمدید.
+    </div>
+    <div class="card text-bg-dark">
+        <img src="{% static 'assessment_app/img/students.svg' %}" class="card-img">
+        <div class="card-img-overlay">
+            <h5 class="card-title"><mark>دانشجویان</mark></h5>
+            <p class="card-text">برای پر کردن فرم‌های ارزشیابی، دانشجویان از این لینک استفاده کنند.</p>
+        </div>
+        <a href="{% url 'student' %}" class="stretched-link"></a>
+    </div>
+    <div class="card text-bg-dark">
+        <img src="{% static 'assessment_app/img/teachers.svg' %}" class="card-img">
+        <div class="card-img-overlay">
+            <h5 class="card-title"><mark>مدرسین و کمک‌مدرسین</mark></h5>
+            <p class="card-text">اساتید و TAها برای بررسی نتایج ارزشیابی از این لینک استفاده کنند.</p>
+        </div>
+        <a href="{% url 'teacher' %}" class="stretched-link"></a>
+    </div>    
+    <!-- <div class="card mb-3 text-bg-dark">
+        <img src="{% static 'assessment_app/img/university.svg' %}" class="card-img">
+        <div class="card-img-overlay">
+            <h5 class="card-title"><mark>دانشگاه</mark></h5>
+            <p class="card-text">نتایج ارزشیابی‌های کلی و ارزشیابی اساتید در اینجا قرار می‌گیرد.</p>
+        </div>
+        <a href="% url 'university' %" class="stretched-link"></a>
+    </div> -->
+</div>
+{% endblock %}
+
+
+

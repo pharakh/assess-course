@@ -1,0 +1,186 @@
+body {
+    div.index_links {
+        padding: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25em;
+        div.heading {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-size: x-large;
+        }
+        p {
+            background-color: rgba(48, 124, 145, 0.719);
+            border-radius: 6px;
+            padding: 6px 6px;
+        }
+        mark {
+            border-radius: 6px;
+        }
+        div.card {
+            margin-bottom: 20px;
+        }
+    }
+
+    div.signing {
+        margin: 30px;
+        h2 {
+            margin-bottom: 20px;
+        }
+        div, input {
+            margin-bottom: 10px;
+        }
+        div.alert_ {
+            svg {
+                scale: .1;
+            }
+        }
+    }
+
+    div.error {
+        margin: 20px;
+    }
+    div.profile {
+        margin: 40px;
+
+        a#exit {
+            margin-right: 5px;
+            margin-top: 0px;
+        }
+
+        div.profile_student {
+            div.course {
+                div.card {
+                    img {
+                        width: 150px;
+                        height: 200px;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
+        div.profile_teacher {
+            div#pills-home {
+                table {
+                    th, td {
+                        // font-size: x-small;
+                        text-align: center;
+                        vertical-align: middle;
+                    }
+                }
+            }
+
+            div#pills-forms_teacher {
+                div.results {
+                    div.que_result{
+                        border: 2px solid rgba(0, 217, 255, 0.363);
+                        border-radius: 5px;
+                        margin-bottom: 20px;
+                        padding: 10px;
+                    }
+
+                    div.course_name {
+                        position: sticky; 
+                        top: 20px; 
+                        border-radius: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    div.form {
+        margin: 30px;
+
+        div.question_field {
+            margin-bottom: 20px;
+        }
+
+        div.form_desc {
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+// for mobile phones
+@media (max-width: 719px) {
+    body {
+        div.profile {
+            ul {
+                li, button {
+                    width: 100%;
+                }
+            }
+            div.course {
+                div.card {
+                    img {
+                        scale: 0.8;
+                    }
+                }
+            }
+            a#exit {
+                margin-right: 0px;
+                margin-top: 5px;
+            }
+
+            div.profile_teacher {    
+                div#pills-forms_teacher {
+                    div.results {
+                        div.closed_results {
+                            display: block;
+
+                            table {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// for really small mobile phones
+@media (max-width: 370px) {
+    body {
+        display: block;
+    }
+}
+
+// for realy realy small screens
+@media (max-width: 300px) {
+    body {
+        display: block;
+    }
+}
+
+
+
+
+// for big screens
+@media (min-width: 720px) {
+    body {
+        div.signing {
+            width: 40em;
+        }
+
+        div.profile {
+            div.profile_teacher {    
+                div#pills-forms_teacher {
+                    div.results {
+                        div.closed_results {
+                            display: inline-flex;
+
+                            table {
+                                width: 300px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

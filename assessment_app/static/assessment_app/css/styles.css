@@ -1,0 +1,115 @@
+body div.index_links {
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+}
+body div.index_links div.heading {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: x-large;
+}
+body div.index_links p {
+  background-color: rgba(48, 124, 145, 0.719);
+  border-radius: 6px;
+  padding: 6px 6px;
+}
+body div.index_links mark {
+  border-radius: 6px;
+}
+body div.index_links div.card {
+  margin-bottom: 20px;
+}
+body div.signing {
+  margin: 30px;
+}
+body div.signing h2 {
+  margin-bottom: 20px;
+}
+body div.signing div, body div.signing input {
+  margin-bottom: 10px;
+}
+body div.signing div.alert_ svg {
+  scale: 0.1;
+}
+body div.error {
+  margin: 20px;
+}
+body div.profile {
+  margin: 40px;
+}
+body div.profile a#exit {
+  margin-right: 5px;
+  margin-top: 0px;
+}
+body div.profile div.profile_student div.course div.card img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+}
+body div.profile div.profile_teacher div#pills-home table th, body div.profile div.profile_teacher div#pills-home table td {
+  text-align: center;
+  vertical-align: middle;
+}
+body div.profile div.profile_teacher div#pills-forms_teacher div.results div.que_result {
+  border: 2px solid rgba(0, 217, 255, 0.363);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+body div.profile div.profile_teacher div#pills-forms_teacher div.results div.course_name {
+  position: sticky;
+  top: 20px;
+  border-radius: 15px;
+}
+body div.form {
+  margin: 30px;
+}
+body div.form div.question_field {
+  margin-bottom: 20px;
+}
+body div.form div.form_desc img {
+  object-fit: cover;
+}
+
+@media (max-width: 719px) {
+  body div.profile ul li, body div.profile ul button {
+    width: 100%;
+  }
+  body div.profile div.course div.card img {
+    scale: 0.8;
+  }
+  body div.profile a#exit {
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+  body div.profile div.profile_teacher div#pills-forms_teacher div.results div.closed_results {
+    display: block;
+  }
+  body div.profile div.profile_teacher div#pills-forms_teacher div.results div.closed_results table {
+    width: 100%;
+  }
+}
+@media (max-width: 370px) {
+  body {
+    display: block;
+  }
+}
+@media (max-width: 300px) {
+  body {
+    display: block;
+  }
+}
+@media (min-width: 720px) {
+  body div.signing {
+    width: 40em;
+  }
+  body div.profile div.profile_teacher div#pills-forms_teacher div.results div.closed_results {
+    display: inline-flex;
+  }
+  body div.profile div.profile_teacher div#pills-forms_teacher div.results div.closed_results table {
+    width: 300px;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
